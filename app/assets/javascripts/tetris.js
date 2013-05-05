@@ -69,12 +69,12 @@ var gamedata = [ [0,0,0,0,0,0,0,0,0,0],   // 0
 		interval = 0,
 		level = 1,
 		lines = 0,
-		gameover = false;
+		gameover = false,
+		grid = false,
 		svg,
 		svgnext;
 
 
-drawGrid();
 attachKeyListeners();
 gameOver();
 
@@ -85,7 +85,7 @@ function tetris() {
 									.attr("height", h),
 	svgnext  = d3.select(".next")
 								.append("svg");
-	drawGrid();
+
 	attachKeyListeners();
 	gameOver();
 }
@@ -1793,8 +1793,18 @@ function createT(next) {
 	return t;
 }
 
+function toggleGrid() {
+	if (grid) {
+		d3.selectAll("line").remove()
+		grid = false;
+	}
+	else {
+		drawGrid();
+		grid = true;
+	}
+}
+
 function drawGrid() {
-	console.log("drawGrid");
 	for (var i = 1; i < rows; i++) {
 		svg.append("line")
 			.attr("x1", 0)
@@ -1889,37 +1899,22 @@ function updateGame() {
 }
 
 function gameOver() {
-	// var r = rows - 1;
-	// var d = [];
-
-	// for (var i = 0; i < cols; i++) {
-	// 	d[i] = i * div;
-	// }
-
 	d3.selectAll("rect.active").remove();
-	// svg.selectAll("g").data([]).exit().remove();
 	svgnext.selectAll("rect").data([]).exit().remove();
 
 
 	svg.selectAll("g").data(gamedata)
-		// .enter().append("g")
-	.selectAll("rect").data(function (d) { return d; })
-		// .enter().append("rect")
-			// .attr("x", function(d, i, j) { return i * div + 1; })
-			// .attr("y", function(d, i, j) { return j * div + 1; })
-			// .attr("width", function(d) { return div - 2; })
-			// .attr("height", function(d) { return div - 2; })
-				.style("fill", function(d, i, j) { return d ? gamedata[j][i] : "red"; })
-				.style("fill-opacity", function(d) { return d ? 1 : 0; })
-				.style("stroke", "gray")
-				.style("stroke-width", 1)
-				.style("stroke-opacity", function(d) { return d ? 1 : 0; })
-			.transition()
-				.delay(function(d, i, j) { return j * 50; })
-				.style("fill", "red")
-				.style("fill-opacity", 0.7)
-				.style("stroke-opacity", 1);
-				// .style("stroke-opacity", )
+		.selectAll("rect").data(function (d) { return d; })
+			.style("fill", function(d, i, j) { return d ? gamedata[j][i] : "red"; })
+			.style("fill-opacity", function(d) { return d ? 1 : 0; })
+			.style("stroke", "gray")
+			.style("stroke-width", 1)
+			.style("stroke-opacity", function(d) { return d ? 1 : 0; })
+		.transition()
+			.delay(function(d, i, j) { return j * 50; })
+			.style("fill", "red")
+			.style("fill-opacity", 0.7)
+			.style("stroke-opacity", 1);
 
 	d3.select("#modal").classed("active-modal", true);
 }

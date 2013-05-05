@@ -58,6 +58,12 @@ aside .next {
 	text-align: center;
 }
 
+.checkbox {
+	margin-top: 10px;
+	font-size: 13px;
+	color: gray;
+}
+
 footer {
 	clear: both;
 	padding-top: 40px;
