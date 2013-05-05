@@ -1854,7 +1854,6 @@ function attachKeyListeners() {
 }
 
 function updateGame() {
-	console.log("updateGame");
 	var a = shape.d(), r, c, j, done = false;
 	
 	for (var i = 0; i < 4; i++) {
@@ -1906,7 +1905,7 @@ function gameOver() {
 	svg.selectAll("g").data(gamedata)
 		.selectAll("rect").data(function (d) { return d; })
 			.style("fill", function(d, i, j) { return d ? gamedata[j][i] : "red"; })
-			.style("fill-opacity", function(d) { return d ? 1 : 0; })
+			.style("fill-opacity", function(d) { return d ? 0.7 : 0; })
 			.style("stroke", "gray")
 			.style("stroke-width", 1)
 			.style("stroke-opacity", function(d) { return d ? 1 : 0; })
@@ -1947,9 +1946,7 @@ function newGame() {
 	level			= 1,
 	lines 		= 0;
 
-	// svgnext.selectAll("rect").data([]).exit().remove();
 	svg.selectAll("g").data([]).exit().remove();
-	// d3.selectAll("rect.active").remove();
 	d3.select("#modal").classed("active-modal", false);
 	d3.select("#level").text(level);
 	d3.select("#lines").text(lines);
