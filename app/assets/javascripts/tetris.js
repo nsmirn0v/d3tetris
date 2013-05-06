@@ -70,6 +70,7 @@ var gamedata = [ [0,0,0,0,0,0,0,0,0,0],   // 0
 		level = 1,
 		lines = 0,
 		gameover = false,
+		paused = false,
 		grid = false,
 		svg,
 		svgnext;
@@ -92,26 +93,25 @@ function tetris() {
 
 function play() {
 	createShape(true);
+	interval = setInterval(start, 650);
+}
 
-  var start = function() {
-		if(shape.animate()) {
-			shape.down().draw();
+function start() {
+	if(shape.animate()) {
+		shape.down().draw();
+	}
+	else {
+		clearInterval(interval);
+		updateGame();
+		createShape(false);
+
+		if (gameover) {
+			gameOver();
 		}
 		else {
-			clearInterval(interval);
-			updateGame();
-			createShape(false);
-
-			if (gameover) {
-				gameOver();
-			}
-			else {
-				interval = setInterval(start, 650 - level * 50);
-			}
+			interval = setInterval(start, 650 - level * 50);
 		}
 	}
-
-	interval = setInterval(start, 650);
 }
 
 function createShape(first) {
@@ -1850,6 +1850,9 @@ function attachKeyListeners() {
 				if (shape.animate() || shape.grace())
 					shape.rotate().draw();
 			}
+			else if (d3.event.keyCode == 80) {
+				pause();
+			}
 		});
 }
 
@@ -1875,24 +1878,23 @@ function updateGame() {
 		}
 	}
 
-	if (emptyRow(1)) {
-		d3.selectAll("rect.active").remove();
-		svg.selectAll("g").data([]).exit().remove();
+	d3.selectAll("rect.active").remove();
+	svg.selectAll("g").data([]).exit().remove();
 
-		svg.selectAll("g").data(gamedata)
-			.enter().append("g")
-		.selectAll("rect").data(function (d) { return d; })
-			.enter().append("rect")
-				.attr("x", function(d, i, j) { return i * div + 1; })
-				.attr("y", function(d, i, j) { return j * div + 1; })
-				.attr("width", function(d) { return div - 2; })
-				.attr("height", function(d) { return div - 2; })
-					.style("fill", function(d, i, j) { return d ? gamedata[j][i] : "none"; })
-					.style("fill-opacity", function(d, i, j) { return d ? 0.7 : "none"; })
-					.style("stroke", function(d) { return d ? "gray" : "none"; })
-					.style("stroke-width", function(d) { return d ? 1 : 0; });
-	}
-	else {
+	svg.selectAll("g").data(gamedata)
+		.enter().append("g")
+	.selectAll("rect").data(function (d) { return d; })
+		.enter().append("rect")
+			.attr("x", function(d, i, j) { return i * div + 1; })
+			.attr("y", function(d, i, j) { return j * div + 1; })
+			.attr("width", function(d) { return div - 2; })
+			.attr("height", function(d) { return div - 2; })
+				.style("fill", function(d, i, j) { return d ? gamedata[j][i] : "none"; })
+				.style("fill-opacity", function(d, i, j) { return d ? 0.7 : "none"; })
+				.style("stroke", function(d) { return d ? "gray" : "none"; })
+				.style("stroke-width", function(d) { return d ? 1 : 0; });
+	
+	if (!emptyRow(1)) {
 		gameover = true;
 	}
 }
@@ -1901,19 +1903,13 @@ function gameOver() {
 	d3.selectAll("rect.active").remove();
 	svgnext.selectAll("rect").data([]).exit().remove();
 
-
 	svg.selectAll("g").data(gamedata)
 		.selectAll("rect").data(function (d) { return d; })
-			.style("fill", function(d, i, j) { return d ? gamedata[j][i] : "red"; })
-			.style("fill-opacity", function(d) { return d ? 0.7 : 0; })
-			.style("stroke", "gray")
-			.style("stroke-width", 1)
-			.style("stroke-opacity", function(d) { return d ? 1 : 0; })
-		.transition()
-			.delay(function(d, i, j) { return j * 50; })
-			.style("fill", "red")
-			.style("fill-opacity", 0.7)
-			.style("stroke-opacity", 1);
+			.transition()
+				.duration(300)
+				.delay(function(d, i, j) { return j * 100; })
+				.style("fill-opacity", 0)
+				.style("stroke-opacity", 0);
 
 	d3.select("#modal").classed("active-modal", true);
 }
@@ -2003,4 +1999,15 @@ function slideDown(j) {
 	if (lines % 5 == 0) level++;
 	d3.select("#level").text(level);
 	d3.select("#lines").text(lines);
+}
+
+function pause() {
+	if (paused) {
+		paused = false;
+		interval = setInterval(start, 650);
+	}
+	else {
+		paused = true;
+		clearInterval(interval);
+	}
 }

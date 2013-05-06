@@ -1,35 +1,74 @@
 
-		<div class="svg-container">
-			<div id="modal">
-				<a href="#" onclick="newGame()">New Game</a>
-			</div>
+<div class="svg-container">
+	<div id="modal">
+		<a href="#" onclick="newGame()">New Game</a>
+	</div>
+
+	<div id="pause">
+		<p>Paused</p>
+
+		<table>
+			<tr>
+				<td class="hotkey">Left arrow</td>
+				<td class="description"> - move left</td>
+			</tr>
+
+			<tr>
+				<td class="hotkey">Right arrow</td>
+				<td class="description"> - move right</td>
+			</tr>
+
+			<tr>
+				<td class="hotkey">Down arrow</td>
+				<td class="description"> - move down</td>
+			</tr>
+
+			<tr>
+				<td class="hotkey">Up arrow</td>
+				<td class="description"> - rotate</td>
+			</tr>
+
+			<tr>
+				<td class="hotkey">Space</td>
+				<td class="description"> - drop</td>
+			</tr>
+
+			<tr>
+				<td class="hotkey">p</td>
+				<td class="description"> - pause/unpause</td>
+			</tr>
+
+		</table>
+	
+	</div>
+</div>
+
+<aside>
+	<div class="next">
+
+	</div>
+
+	<div class="score">
+		<div class="level">
+			Level:
+			<span id="level">1</span>
 		</div>
+		
+		<div class="lines">
+			Lines: 
+			<span id="lines">0</span>
+		</div>
+	</div>
 
-		<aside>
-			<div class="next">
+	<div class="checkbox">
+		<input type="checkbox" onclick="toggleGrid()"></input>Grid
+	</div>
 
-			</div>
+	<div class="pause"><span class="hotkey">P</span> to pause.</div>
+</aside>
 
-			<div class="score">
-				<div class="level">
-					Level:
-					<span id="level">1</span>
-				</div>
-				
-				<div class="lines">
-					Lines: 
-					<span id="lines">0</span>
-				</div>
-			</div>
-
-			<div class="checkbox">
-				<input type="checkbox" onclick="toggleGrid()"></input>Grid
-			</div>
-		</aside>
-
-		<footer>
-			by 
-        <a href="http://www.linkedin.com/pub/nikolay-smirnov/22/ba7/5a1" target="_blank">
-          Nikolay Smirnov</a>
-		</footer>
-
+<footer>
+	by 
+    <a href="http://www.linkedin.com/pub/nikolay-smirnov/22/ba7/5a1" target="_blank">
+      Nikolay Smirnov</a>
+</footer>
