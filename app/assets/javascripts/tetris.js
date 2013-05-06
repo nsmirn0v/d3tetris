@@ -76,9 +76,9 @@ var gamedata = [ [0,0,0,0,0,0,0,0,0,0],   // 0
 		svgnext;
 
 
-attachKeyListeners();
+// attachKeyListeners();
 gameOver();
-
+// 
 function tetris() {
 	svg = d3.select(".svg-container")
 								.append("svg")
@@ -107,6 +107,7 @@ function start() {
 
 		if (gameover) {
 			gameOver();
+			interval = 0;
 		}
 		else {
 			interval = setInterval(start, 650 - level * 50);
@@ -1831,27 +1832,28 @@ function attachKeyListeners() {
 	d3.select("body")
 		.on("keydown", function(event) {
 			if (d3.event.keyCode == 37) {
-				if (shape.animate() || shape.grace())
+				if (!paused && (shape.animate() || shape.grace()))
 					shape.left().draw();
 			}
 			else if (d3.event.keyCode == 39) {
-				if (shape.animate() || shape.grace())
+				if (!paused && (shape.animate() || shape.grace()))
 					shape.right().draw();
 			}
 			else if (d3.event.keyCode == 40) {
-				if (shape.animate())
+				if (!paused && shape.animate())
 					shape.down().draw();
 			}
 			else if (d3.event.keyCode == 32) {
-				if (shape.animate())
+				if (!paused && shape.animate())
 					shape.drop().draw();
 			}
 			else if (d3.event.keyCode == 38) {
-				if (shape.animate() || shape.grace())
+				if (!paused && (shape.animate() || shape.grace()))
 					shape.rotate().draw();
 			}
 			else if (d3.event.keyCode == 80) {
-				pause();
+				if (interval)
+					pause();
 			}
 		});
 }
