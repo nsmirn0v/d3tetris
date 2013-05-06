@@ -2005,9 +2005,11 @@ function pause() {
 	if (paused) {
 		paused = false;
 		interval = setInterval(start, 650);
+		d3.select("#pause").classed("paused", false);
 	}
 	else {
 		paused = true;
 		clearInterval(interval);
+		d3.select("#pause").classed("paused", true);
 	}
 }

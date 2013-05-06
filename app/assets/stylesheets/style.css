@@ -41,14 +41,14 @@ aside .pause {
 	position: absolute;
 	bottom: 0px;
 	color: gray;
-	font-size: 13px;
+	font-size: 12px;
 	font-style: italic;
 	padding-left: 3px;
 }
 
 aside .pause .hotkey {
 	font-style: normal;
-	font-size: 15px;
+	font-size: 12px;
 }
 
 #modal {
@@ -104,13 +104,15 @@ table {
 }
 
 .description {
+	text-align: left;
 	font-size: 12px;
+	font-weight: normal;
 	font-style: italic
 }
 
 .checkbox {
 	margin-top: 10px;
-	font-size: 13px;
+	font-size: 12px;
 	color: gray;
 }
 
