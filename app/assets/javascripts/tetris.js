@@ -221,9 +221,10 @@ function createBar(next) {
 				.attr("y", function (d) { return d[1] + 1; })
 				.attr("width", div - 2)
 				.attr("height", div - 2)
-			 	.style("stroke", "gray")
+			 	.style("stroke", f)
 	  		.style("stroke-width", 1)
-				.style("fill", f);
+				.style("fill", f)
+				.style("fill-opacity", 0.6);
 
 	bar.f = function (value) { 
 		if (!arguments.length) return f; 
@@ -429,9 +430,10 @@ function createSquare(next) {
 				.attr("y", function(d) { return d[1] + 1; })
 				.attr("width", div - 2)
 				.attr("height", div - 2)
+					.style("stroke", f)
+		  		.style("stroke-width", 1)
 					.style("fill", f)
-				 	.style("stroke", "gray")
-		  		.style("stroke-width", 1);
+					.style("fill-opacity", 0.6);
 
 	sqr.f = function (value) { 
 		if (!arguments.length) return f;
@@ -589,9 +591,10 @@ function createL1(next) {
 				.attr("y", function(d) { return d[1] + 1; })
 				.attr("width", div - 2)
 				.attr("height", div - 2)
+					.style("stroke", f)
+		  		.style("stroke-width", 1)
 					.style("fill", f)
-				 	.style("stroke", "gray")
-		  		.style("stroke-width", 1);
+					.style("fill-opacity", 0.6);
 
 	l1.f = function () { return f; };
 
@@ -876,9 +879,10 @@ function createL2(next) {
 				.attr("y", function(d) { return d[1] + 1; })
 				.attr("width", div - 2)
 				.attr("height", div - 2)
+					.style("stroke", f)
+		  		.style("stroke-width", 1)
 					.style("fill", f)
-				 	.style("stroke", "gray")
-		  		.style("stroke-width", 1);
+					.style("fill-opacity", 0.6);
 
 	l2.f = function () { return f; };
 
@@ -1155,9 +1159,10 @@ function createZ1 (next) {
 				.attr("y", function(d) { return d[1] + 1; })
 				.attr("width", div - 2)
 				.attr("height", div - 2)
+					.style("stroke", f)
+		  		.style("stroke-width", 1)
 					.style("fill", f)
-				 	.style("stroke", "gray")
-		  		.style("stroke-width", 1);
+					.style("fill-opacity", 0.6);
 
 	z1.f = function () { return f; };
 
@@ -1350,9 +1355,10 @@ function createZ2 (next) {
 				.attr("y", function(d) { return d[1] + 1; })
 				.attr("width", div - 2)
 				.attr("height", div - 2)
+					.style("stroke", f)
+		  		.style("stroke-width", 1)
 					.style("fill", f)
-				 	.style("stroke", "gray")
-		  		.style("stroke-width", 1);
+					.style("fill-opacity", 0.6);
 
 	z2.f = function () { return f; };
 
@@ -1564,9 +1570,10 @@ function createT(next) {
 				.attr("y", function(d) { return d[1] + 1; })
 				.attr("width", div - 2)
 				.attr("height", div - 2)
+					.style("stroke", f)
+		  		.style("stroke-width", 1)
 					.style("fill", f)
-				 	.style("stroke", "gray")
-		  		.style("stroke-width", 1);
+					.style("fill-opacity", 0.6);
 
 	t.f = function () { return f; };
 
@@ -1893,7 +1900,7 @@ function updateGame() {
 			.attr("height", function(d) { return div - 2; })
 				.style("fill", function(d, i, j) { return d ? gamedata[j][i] : "none"; })
 				.style("fill-opacity", function(d, i, j) { return d ? 0.7 : "none"; })
-				.style("stroke", function(d) { return d ? "gray" : "none"; })
+				.style("stroke", function(d, i, j) { return d ? gamedata[j][i] : "none"; })
 				.style("stroke-width", function(d) { return d ? 1 : 0; });
 	
 	if (!emptyRow(1)) {
@@ -1963,9 +1970,10 @@ function drawNext(data, length, fill) {
 				.attr("y", function(d) { return d[1]; })
 				.attr("width", length)
 				.attr("height", length)
+		  		.style("stroke", fill)
+		  		.style("stroke-width", 1)
 					.style("fill", fill)
-				 	.style("stroke", "gray")
-		  		.style("stroke-width", 1);
+					.style("fill-opacity", 0.6);
 }
 
 function emptyRow(j) {
