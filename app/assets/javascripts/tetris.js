@@ -1554,7 +1554,8 @@ function createT(next) {
 	var d   = [ [3 * div, 0], [4 * div, 0], [5 * div, 0], [4 * div, div] ], // data
 			dPreview = [ [20,30], [40,30], [60,30], [40,10] ],
 			o   = 0, // orientation
-			f 	= "yellow",	// fill																								
+			// f 	= "yellow",	// fill																								
+			f 	= "#D7DF01",	// fill																								
 			grace = true,
 		  t = {};
 	
