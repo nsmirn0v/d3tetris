@@ -2016,7 +2016,7 @@ function slideDown(j) {
 function pause() {
 	if (paused) {
 		paused = false;
-		interval = setInterval(start, 650);
+		interval = setInterval(start, 650 - level * 50);
 		d3.select("#pause").classed("paused", false);
 	}
 	else {
