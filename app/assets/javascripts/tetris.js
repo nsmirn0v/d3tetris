@@ -610,8 +610,9 @@ function createL1(next) {
 				move = true;
 		}
 		else if (o == 90) {
-			if (gamedata[r][c - 1] == 0 && gamedata[r + 1][c] == 0 &&
-				gamedata[r + 2][c] == 0) move = true;
+			if ((gamedata[r] == undefined || gamedata[r][c - 1] == 0) &&
+				gamedata[r + 1][c] == 0 && gamedata[r + 2][c] == 0) 
+				move = true;
 		}
 		else if (o == 180) {
 			if (gamedata[r][c - 1] == 0 && gamedata[r + 1][c - 3] == 0)
@@ -640,8 +641,9 @@ function createL1(next) {
 				move = true;
 		}
 		else if (o == 90) {
-			if (gamedata[r][c + 2] == 0 && gamedata[r + 1][c + 2] == 0 &&
-				gamedata[r + 2][c + 2] == 0) move = true;
+			if ((gamedata[r] == undefined || gamedata[r][c + 2] == 0) &&
+				gamedata[r + 1][c + 2] == 0 && gamedata[r + 2][c + 2] == 0)
+				move = true;
 		}
 		else if (o == 180) {
 			if (gamedata[r][c + 1] == 0 && gamedata[r + 1][c + 1] == 0)
@@ -1552,9 +1554,8 @@ function createZ2 (next) {
 */
 function createT(next) {
 	var d   = [ [3 * div, 0], [4 * div, 0], [5 * div, 0], [4 * div, div] ], // data
-			dPreview = [ [20,30], [40,30], [60,30], [40,10] ],
+			dPreview = [ [20,10], [40,10], [60,10], [40,30] ],
 			o   = 0, // orientation
-			// f 	= "yellow",	// fill																								
 			f 	= "#D7DF01",	// fill																								
 			grace = true,
 		  t = {};
