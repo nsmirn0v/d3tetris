@@ -60,25 +60,24 @@ var gamedata = [ [0,0,0,0,0,0,0,0,0,0],   // 0
 								 [0,0,0,0,0,0,0,0,0,0] ], // 17
     div 		 = 25,
 		rows     = 18,
-		cols     = 10
+		cols     = 10,
 		w        = cols * div,
 		h        = rows * div,
 		shape    = {},	
 		nextShape = {},
 		next 		 = -1,
 		interval = 0,
+		timeInterval = 0,
 		level = 1,
 		lines = 0,
+		time = 0,
 		gameover = false,
 		paused = false,
 		grid = false,
 		svg,
-		svgnext;
-
-
-// attachKeyListeners();
-gameOver();
-// 
+		svgnext,
+		topten;
+ 
 function tetris() {
 	svg = d3.select(".svg-container")
 								.append("svg")
@@ -93,6 +92,10 @@ function tetris() {
 
 function play() {
 	createShape(true);
+	timeInterval = setInterval(function() { 
+		time++;
+		d3.select("#time").text(time);
+	}, 1000);
 	interval = setInterval(start, 650);
 }
 
@@ -107,7 +110,7 @@ function start() {
 
 		if (gameover) {
 			gameOver();
-			interval = 0;
+			clearInterval(timeInterval);
 		}
 		else {
 			interval = setInterval(start, 650 - level * 50);
@@ -1911,6 +1914,7 @@ function updateGame() {
 }
 
 function gameOver() {
+	if (gameover) addScore();
 	d3.selectAll("rect.active").remove();
 	svgnext.selectAll("rect").data([]).exit().remove();
 
@@ -1946,17 +1950,20 @@ function newGame() {
 								 [0,0,0,0,0,0,0,0,0,0] ], // 17
 	prev		 	= -1,
 	interval 	= 0,
+	timeInterval = 0,
 	gameover 	= false,
 	shape    	= {},	
 	nextShape = {},
 	next 		  = -1,
 	level			= 1,
-	lines 		= 0;
+	lines 		= 0,
+	time 		  = 0;
 
 	svg.selectAll("g").data([]).exit().remove();
 	d3.select("#modal").classed("active-modal", false);
 	d3.select("#level").text(level);
 	d3.select("#lines").text(lines);
+	d3.select("#time").text(time);
 	play()
 }
 
@@ -2017,11 +2024,62 @@ function pause() {
 	if (paused) {
 		paused = false;
 		interval = setInterval(start, 650 - level * 50);
+		timeInterval = setInterval(function() { 
+			time++;
+			d3.select("#time").text(time);
+		}, 1000);
 		d3.select("#pause").classed("paused", false);
 	}
 	else {
 		paused = true;
 		clearInterval(interval);
+		clearInterval(timeInterval);
 		d3.select("#pause").classed("paused", true);
 	}
 }
+
+function addScore () {
+	$.ajax({
+		type: "get",
+		url: createURL(),
+		dataType: "json",
+		success: function(json) { updateStats(json); }
+	});
+}
+
+function createURL() {
+	var url = "http://localhost:3000/scores/create";
+	url += "?level=" + level;
+	url += "&lines=" + lines;
+	url += "&time=" + time;
+	return url; 
+}
+
+function updateStats(json) {
+	console.log(json);
+	d3.select("#gamesplayed").text(json.count);
+	d3.select("#hs-lines").text(json.hs.lines);
+	d3.select("#hs-time").text(json.hs.time);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

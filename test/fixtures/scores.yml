@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  level: 1
+  lines: 1
+  time: 1
+
+two:
+  level: 1
+  lines: 1
+  time: 1
