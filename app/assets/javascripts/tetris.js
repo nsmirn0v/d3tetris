@@ -2056,7 +2056,6 @@ function createURL() {
 }
 
 function updateStats(json) {
-	console.log(json);
 	d3.select("#gamesplayed").text(json.count);
 	d3.select("#hs-lines").text(json.hs.lines);
 	d3.select("#hs-time").text(json.hs.time);

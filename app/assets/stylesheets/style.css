@@ -143,7 +143,7 @@ table {
 .stats {
 	float: right;
 	text-align: right;
-	color: gray;
+	/*color: gray;*/
 }
 
 .stats #gamesplayed {
@@ -159,6 +159,7 @@ table {
 
 .stats span {
 	font-size: 11px;
+	color: lightgray;
 }
 
 .highestscore {
