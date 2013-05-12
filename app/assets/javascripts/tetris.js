@@ -2048,7 +2048,7 @@ function addScore () {
 }
 
 function createURL() {
-	var url = "http://localhost:3000/scores/create";
+	var url = "http://d3tetris.herokuapp.com/scores/create";
 	url += "?level=" + level;
 	url += "&lines=" + lines;
 	url += "&time=" + time;
