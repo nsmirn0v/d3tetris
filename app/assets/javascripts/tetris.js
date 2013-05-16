@@ -76,7 +76,7 @@ var gamedata = [ [0,0,0,0,0,0,0,0,0,0],   // 0
 		grid = false,
 		svg,
 		svgnext,
-		topten;
+		scoreID;
  
 function tetris() {
 	svg = d3.select(".svg-container")
@@ -1914,7 +1914,12 @@ function updateGame() {
 }
 
 function gameOver() {
-	if (gameover) addScore();
+	// if (gameover) addScore();
+	if (gameover) {
+		updateScore();
+		scoreID = null;
+	}
+
 	d3.selectAll("rect.active").remove();
 	svgnext.selectAll("rect").data([]).exit().remove();
 
@@ -1964,6 +1969,7 @@ function newGame() {
 	d3.select("#level").text(level);
 	d3.select("#lines").text(lines);
 	d3.select("#time").text(time);
+	createScore();
 	play()
 }
 
@@ -2038,7 +2044,17 @@ function pause() {
 	}
 }
 
-function addScore () {
+function createScore() {
+	$.ajax({
+		type: "get",
+		url: createURL(),
+		dataType: "json",
+		beforeSend: updateCount(),
+		success: function(json) { scoreID = json.scoreID; }
+	});
+}
+
+function updateScore() {
 	$.ajax({
 		type: "get",
 		url: createURL(),
@@ -2048,10 +2064,18 @@ function addScore () {
 }
 
 function createURL() {
-	var url = "http://d3tetris.herokuapp.com/scores/create";
-	url += "?level=" + level;
-	url += "&lines=" + lines;
-	url += "&time=" + time;
+	var url = "http://d3tetris.herokuapp.com/scores/";
+
+	if (scoreID) {
+		url += "update?scoreID=" + scoreID;
+		url += "&level=" + level;
+		url += "&lines=" + lines;
+		url += "&time=" + time;
+	}
+	else {
+		url += "create";
+	}
+	
 	return url; 
 }
 
@@ -2059,6 +2083,11 @@ function updateStats(json) {
 	d3.select("#gamesplayed").text(json.count);
 	d3.select("#hs-lines").text(json.hs.lines);
 	d3.select("#hs-time").text(json.hs.time);
+}
+
+function updateCount() { 
+	var count = Number(d3.select("#gamesplayed").text());
+	d3.select("#gamesplayed").text(count + 1);
 }
 
 

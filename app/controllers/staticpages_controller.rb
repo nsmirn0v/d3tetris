@@ -1,6 +1,6 @@
 class StaticpagesController < ApplicationController
   def index
   	@score = Score.topscore.first
-  	@count = Score.count + 1068
+  	@count = Score.count
   end
 end
