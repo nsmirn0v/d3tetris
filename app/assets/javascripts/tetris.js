@@ -2049,8 +2049,8 @@ function createScore() {
 		type: "get",
 		url: createURL(),
 		dataType: "json",
-		beforeSend: updateCount(),
-		success: function(json) { scoreID = json.scoreID; }
+		beforeSend: updateCount()
+		// success: function(json) { scoreID = json.scoreID; }
 	});
 }
 
@@ -2064,11 +2064,13 @@ function updateScore() {
 }
 
 function createURL() {
-	var url = "http://d3tetris.herokuapp.com/scores/";
+	// var url = "http://d3tetris.herokuapp.com/scores/";
+	var url = "http://localhost:3000/scores/";
 
-	if (scoreID) {
-		url += "update?scoreID=" + scoreID;
-		url += "&level=" + level;
+	if (gameover) {
+		// url += "update?scoreID=" + scoreID;
+		// url += "&level=" + level;
+		url += "update?level=" + level;
 		url += "&lines=" + lines;
 		url += "&time=" + time;
 	}
