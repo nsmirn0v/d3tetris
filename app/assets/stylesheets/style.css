@@ -22,8 +22,8 @@ a:hover {
 .svg-container {
 	position: relative;
 	overflow: hidden;
-	width: 350px;
-	height: 630px;
+	width: 330px;
+	height: 594px;
 	border: 5px solid rgba(0,0,0,0.2);
 	border-radius: 2px;
 	float: left;
