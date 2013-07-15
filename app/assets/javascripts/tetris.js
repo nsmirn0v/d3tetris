@@ -39,56 +39,57 @@
 
 
 
-//								0 1 2 3 4 5 6 7 8 9
-var gamedata = [ [0,0,0,0,0,0,0,0,0,0],   // 0
-								 [0,0,0,0,0,0,0,0,0,0],   // 1
-								 [0,0,0,0,0,0,0,0,0,0],   // 2
-								 [0,0,0,0,0,0,0,0,0,0],   // 3
-								 [0,0,0,0,0,0,0,0,0,0],   // 4
-								 [0,0,0,0,0,0,0,0,0,0],   // 5
-								 [0,0,0,0,0,0,0,0,0,0],   // 6
-								 [0,0,0,0,0,0,0,0,0,0],   // 7
-								 [0,0,0,0,0,0,0,0,0,0],   // 8
-								 [0,0,0,0,0,0,0,0,0,0],   // 9
-								 [0,0,0,0,0,0,0,0,0,0],   // 10
-								 [0,0,0,0,0,0,0,0,0,0],   // 11
-								 [0,0,0,0,0,0,0,0,0,0],   // 12
-								 [0,0,0,0,0,0,0,0,0,0],   // 13
-								 [0,0,0,0,0,0,0,0,0,0],   // 14
-								 [0,0,0,0,0,0,0,0,0,0],   // 15
-								 [0,0,0,0,0,0,0,0,0,0],   // 16
-								 [0,0,0,0,0,0,0,0,0,0] ], // 17
-    div 		 = 25,
-		rows     = 18,
-		cols     = 10,
-		w        = cols * div,
-		h        = rows * div,
-		shape    = {},	
-		nextShape = {},
-		next 		 = -1,
-		interval = 0,
-		timeInterval = 0,
-		level = 1,
-		lines = 0,
-		time = 0,
-		gameover = false,
-		paused = false,
-		grid = false,
-		svg,
-		svgnext,
-		scoreID;
+//								
+var gamedata = [ [0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0] ],
+   div = 35,
+	rows = 18,
+	cols = 10,
+	w = cols * div,
+	h = rows * div,
+	shape = {},	
+	nextShape = {},
+	next = -1,
+	interval = 0,
+	timeInterval = 0,
+	level = 1,
+	lines = 0,
+	time = 0,
+	gameover = false,
+	paused = false,
+	grid = false,
+	svg,
+	svgnext,
+	scoreID;
  
 function tetris() {
 	svg = d3.select(".svg-container")
-								.append("svg")
-									.attr("width", w)
-									.attr("height", h),
-	svgnext  = d3.select(".next")
-								.append("svg");
+		.append("svg")
+			.attr("width", w)
+			.attr("height", h),
+	
+	svgnext = d3.select(".next")
+		.append("svg");
 
 	attachKeyListeners();
 	gameOver();
-}
+} 
 
 function play() {
 	createShape(true);
@@ -206,15 +207,16 @@ function createShape(first) {
 */
 function createBar(next) {
 	var d   = [ [3 * div, 0], [4 * div, 0], [5 * div, 0], [6 * div, 0] ], // data
-			dPreview = [ [10,20], [30,20], [50,20], [70,20] ],
-			o   = 0, // orientation
-			f 	= "orange",	// fill		
-			grace = true,																						
-		  bar = {};
+		dPreview = [ [10,20], [30,20], [50,20], [70,20] ],
+		o  = 0, // orientation
+		f 	= "orange",	// fill		
+		grace = true,																						
+		bar = {};
 
-	if (next)
+	if (next) {
 		drawNext(dPreview, 20, f);
-	else
+	}
+	else {
 		svg.selectAll("rect.active")
 			.data(d)
 			.enter()
@@ -222,12 +224,14 @@ function createBar(next) {
 				.attr("class", "active")
 				.attr("x", function (d) { return d[0] + 1; })
 				.attr("y", function (d) { return d[1] + 1; })
+				.attr("rx", 1)
 				.attr("width", div - 2)
 				.attr("height", div - 2)
 			 	.style("stroke", f)
 	  		.style("stroke-width", 1)
 				.style("fill", f)
 				.style("fill-opacity", 0.6);
+	}
 
 	bar.f = function (value) { 
 		if (!arguments.length) return f; 
@@ -398,7 +402,8 @@ function createBar(next) {
 		svg.selectAll("rect.active")
 			.data(d)
 			.attr("x", function(d) { return d[0] + 1; })
-			.attr("y", function(d) { return d[1] + 1; });	
+			.attr("y", function(d) { return d[1] + 1; })
+			.attr("rx", 1);	
 
 		return bar;
 	};
@@ -431,6 +436,7 @@ function createSquare(next) {
 				.attr("class", "active")
 				.attr("x", function(d) { return d[0] + 1; })
 				.attr("y", function(d) { return d[1] + 1; })
+				.attr("rx", 1)
 				.attr("width", div - 2)
 				.attr("height", div - 2)
 					.style("stroke", f)
@@ -531,6 +537,7 @@ function createSquare(next) {
 			.data(d)
 			.attr("x", function(d) { return d[0] + 1; })
 			.attr("y", function(d) { return d[1] + 1; })
+			.attr("rx", 1);
 		
 		return sqr;
 	};
@@ -592,6 +599,7 @@ function createL1(next) {
 				.attr("class", "active")
 				.attr("x", function(d) { return d[0] + 1; })
 				.attr("y", function(d) { return d[1] + 1; })
+				.attr("rx", 1)
 				.attr("width", div - 2)
 				.attr("height", div - 2)
 					.style("stroke", f)
@@ -819,7 +827,8 @@ function createL1(next) {
 		svg.selectAll("rect.active")
 			.data(d)
 			.attr("x", function(d) { return d[0] + 1; })
-			.attr("y", function(d) { return d[1] + 1; });
+			.attr("y", function(d) { return d[1] + 1; })
+			.attr("rx", 1);
 
 		return l1;
 	};
@@ -882,6 +891,7 @@ function createL2(next) {
 				.attr("class", "active")
 				.attr("x", function(d) { return d[0] + 1; })
 				.attr("y", function(d) { return d[1] + 1; })
+				.attr("rx", 1)
 				.attr("width", div - 2)
 				.attr("height", div - 2)
 					.style("stroke", f)
@@ -1117,7 +1127,8 @@ function createL2(next) {
 		svg.selectAll("rect.active")
 			.data(d)
 			.attr("x", function(d) { return d[0] + 1; })
-			.attr("y", function(d) { return d[1] + 1; });
+			.attr("y", function(d) { return d[1] + 1; })
+			.attr("rx", 1);
 
 		return l2;
 	};
@@ -1162,6 +1173,7 @@ function createZ1 (next) {
 				.attr("class", "active")
 				.attr("x", function(d) { return d[0] + 1; })
 				.attr("y", function(d) { return d[1] + 1; })
+				.attr("rx", 1)
 				.attr("width", div - 2)
 				.attr("height", div - 2)
 					.style("stroke", f)
@@ -1313,7 +1325,8 @@ function createZ1 (next) {
 		svg.selectAll("rect.active")
 			.data(d)
 			.attr("x", function(d) { return d[0] + 1; })
-			.attr("y", function(d) { return d[1] + 1; });
+			.attr("y", function(d) { return d[1] + 1; })
+			.attr("rx", 1);
 
 		return z1;
 	}; 
@@ -1358,6 +1371,7 @@ function createZ2 (next) {
 				.attr("class", "active")
 				.attr("x", function(d) { return d[0] + 1; })
 				.attr("y", function(d) { return d[1] + 1; })
+				.attr("rx", 1)
 				.attr("width", div - 2)
 				.attr("height", div - 2)
 					.style("stroke", f)
@@ -1510,7 +1524,8 @@ function createZ2 (next) {
 		svg.selectAll("rect.active")
 			.data(d)
 			.attr("x", function(d) { return d[0] + 1; })
-			.attr("y", function(d) { return d[1] + 1; });
+			.attr("y", function(d) { return d[1] + 1; })
+			.attr("rx", 1);
 
 		return z2;
 	}; 
@@ -1573,6 +1588,7 @@ function createT(next) {
 				.attr("class", "active")
 				.attr("x", function(d) { return d[0] + 1; })
 				.attr("y", function(d) { return d[1] + 1; })
+				.attr("rx", 1)
 				.attr("width", div - 2)
 				.attr("height", div - 2)
 					.style("stroke", f)
@@ -1798,7 +1814,8 @@ function createT(next) {
 		svg.selectAll("rect.active")
 			.data(d)
 			.attr("x", function(d) { return d[0] + 1; })
-			.attr("y", function(d) { return d[1] + 1; });
+			.attr("y", function(d) { return d[1] + 1; })
+			.attr("rx", 1);
 
 		return t;
 	}; 
@@ -1901,6 +1918,7 @@ function updateGame() {
 		.enter().append("rect")
 			.attr("x", function(d, i, j) { return i * div + 1; })
 			.attr("y", function(d, i, j) { return j * div + 1; })
+			.attr("rx", 1)
 			.attr("width", function(d) { return div - 2; })
 			.attr("height", function(d) { return div - 2; })
 				.style("fill", function(d, i, j) { return d ? gamedata[j][i] : "none"; })
@@ -1914,7 +1932,6 @@ function updateGame() {
 }
 
 function gameOver() {
-	// if (gameover) addScore();
 	if (gameover) {
 		updateScore();
 		scoreID = null;
@@ -1936,33 +1953,33 @@ function gameOver() {
 
 function newGame() {
 	gamedata = [ [0,0,0,0,0,0,0,0,0,0],   // 0
-								 [0,0,0,0,0,0,0,0,0,0],   // 1
-								 [0,0,0,0,0,0,0,0,0,0],   // 2
-								 [0,0,0,0,0,0,0,0,0,0],   // 3
-								 [0,0,0,0,0,0,0,0,0,0],   // 4
-								 [0,0,0,0,0,0,0,0,0,0],   // 5
-								 [0,0,0,0,0,0,0,0,0,0],   // 6
-								 [0,0,0,0,0,0,0,0,0,0],   // 7
-								 [0,0,0,0,0,0,0,0,0,0],   // 8
-								 [0,0,0,0,0,0,0,0,0,0],   // 9
-								 [0,0,0,0,0,0,0,0,0,0],   // 10
-								 [0,0,0,0,0,0,0,0,0,0],   // 11
-								 [0,0,0,0,0,0,0,0,0,0],   // 12
-								 [0,0,0,0,0,0,0,0,0,0],   // 13
-								 [0,0,0,0,0,0,0,0,0,0],   // 14
-								 [0,0,0,0,0,0,0,0,0,0],   // 15
-								 [0,0,0,0,0,0,0,0,0,0],   // 16
-								 [0,0,0,0,0,0,0,0,0,0] ], // 17
-	prev		 	= -1,
-	interval 	= 0,
+		[0,0,0,0,0,0,0,0,0,0],   // 1
+		[0,0,0,0,0,0,0,0,0,0],   // 2
+		[0,0,0,0,0,0,0,0,0,0],   // 3
+		[0,0,0,0,0,0,0,0,0,0],   // 4
+		[0,0,0,0,0,0,0,0,0,0],   // 5
+		[0,0,0,0,0,0,0,0,0,0],   // 6
+		[0,0,0,0,0,0,0,0,0,0],   // 7
+		[0,0,0,0,0,0,0,0,0,0],   // 8
+		[0,0,0,0,0,0,0,0,0,0],   // 9
+		[0,0,0,0,0,0,0,0,0,0],   // 10
+		[0,0,0,0,0,0,0,0,0,0],   // 11
+		[0,0,0,0,0,0,0,0,0,0],   // 12
+		[0,0,0,0,0,0,0,0,0,0],   // 13
+		[0,0,0,0,0,0,0,0,0,0],   // 14
+		[0,0,0,0,0,0,0,0,0,0],   // 15
+		[0,0,0,0,0,0,0,0,0,0],   // 16
+		[0,0,0,0,0,0,0,0,0,0] ], // 17
+	prev = -1,
+	interval = 0,
 	timeInterval = 0,
-	gameover 	= false,
-	shape    	= {},	
+	gameover	= false,
+	shape	= {},	
 	nextShape = {},
-	next 		  = -1,
-	level			= 1,
-	lines 		= 0,
-	time 		  = 0;
+	next = -1,
+	level = 1,
+	lines	= 0,
+	time = 0;
 
 	svg.selectAll("g").data([]).exit().remove();
 	d3.select("#modal").classed("active-modal", false);
@@ -1983,6 +2000,7 @@ function drawNext(data, length, fill) {
 			.append("rect")
 				.attr("x", function(d) { return d[0]; })
 				.attr("y", function(d) { return d[1]; })
+				.attr("rx", 1)
 				.attr("width", length - 2)
 				.attr("height", length - 2)
 		  		.style("stroke", fill)
@@ -2045,6 +2063,8 @@ function pause() {
 }
 
 function createScore() {
+	if (gameover);
+
 	$.ajax({
 		type: "get",
 		url: createURL(),
@@ -2089,25 +2109,3 @@ function updateCount() {
 	var count = Number(d3.select("#gamesplayed").text());
 	d3.select("#gamesplayed").text(count + 1);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
