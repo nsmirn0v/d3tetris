@@ -225,10 +225,10 @@ function createBar(next) {
 				.attr("x", function (d) { return d[0] + 1; })
 				.attr("y", function (d) { return d[1] + 1; })
 				.attr("rx", 1)
-				.attr("width", div - 2)
-				.attr("height", div - 2)
+				.attr("width", div - 3)
+				.attr("height", div - 3)
 			 	.style("stroke", f)
-	  		.style("stroke-width", 1)
+	  		.style("stroke-width", 2)
 				.style("fill", f)
 				.style("fill-opacity", 0.6);
 	}
@@ -365,9 +365,7 @@ function createBar(next) {
 	};
 
 	bar.animate = function () {
-		var r, // row 
-				c, // col
-				animate = true;
+		var r, c, animate = true;
 
 		if (d[0][1] == div * 17) {
 			return false;
@@ -402,8 +400,7 @@ function createBar(next) {
 		svg.selectAll("rect.active")
 			.data(d)
 			.attr("x", function(d) { return d[0] + 1; })
-			.attr("y", function(d) { return d[1] + 1; })
-			.attr("rx", 1);	
+			.attr("y", function(d) { return d[1] + 1; });
 
 		return bar;
 	};
@@ -437,10 +434,10 @@ function createSquare(next) {
 				.attr("x", function(d) { return d[0] + 1; })
 				.attr("y", function(d) { return d[1] + 1; })
 				.attr("rx", 1)
-				.attr("width", div - 2)
-				.attr("height", div - 2)
+				.attr("width", div - 3)
+				.attr("height", div - 3)
 					.style("stroke", f)
-		  		.style("stroke-width", 1)
+		  		.style("stroke-width", 2)
 					.style("fill", f)
 					.style("fill-opacity", 0.6);
 
@@ -536,8 +533,7 @@ function createSquare(next) {
 		svg.selectAll("rect.active")
 			.data(d)
 			.attr("x", function(d) { return d[0] + 1; })
-			.attr("y", function(d) { return d[1] + 1; })
-			.attr("rx", 1);
+			.attr("y", function(d) { return d[1] + 1; });
 		
 		return sqr;
 	};
@@ -600,10 +596,10 @@ function createL1(next) {
 				.attr("x", function(d) { return d[0] + 1; })
 				.attr("y", function(d) { return d[1] + 1; })
 				.attr("rx", 1)
-				.attr("width", div - 2)
-				.attr("height", div - 2)
+				.attr("width", div - 3)
+				.attr("height", div - 3)
 					.style("stroke", f)
-		  		.style("stroke-width", 1)
+		  		.style("stroke-width", 2)
 					.style("fill", f)
 					.style("fill-opacity", 0.6);
 
@@ -827,8 +823,7 @@ function createL1(next) {
 		svg.selectAll("rect.active")
 			.data(d)
 			.attr("x", function(d) { return d[0] + 1; })
-			.attr("y", function(d) { return d[1] + 1; })
-			.attr("rx", 1);
+			.attr("y", function(d) { return d[1] + 1; });
 
 		return l1;
 	};
@@ -892,10 +887,10 @@ function createL2(next) {
 				.attr("x", function(d) { return d[0] + 1; })
 				.attr("y", function(d) { return d[1] + 1; })
 				.attr("rx", 1)
-				.attr("width", div - 2)
-				.attr("height", div - 2)
+				.attr("width", div - 3)
+				.attr("height", div - 3)
 					.style("stroke", f)
-		  		.style("stroke-width", 1)
+		  		.style("stroke-width", 2)
 					.style("fill", f)
 					.style("fill-opacity", 0.6);
 
@@ -1127,8 +1122,7 @@ function createL2(next) {
 		svg.selectAll("rect.active")
 			.data(d)
 			.attr("x", function(d) { return d[0] + 1; })
-			.attr("y", function(d) { return d[1] + 1; })
-			.attr("rx", 1);
+			.attr("y", function(d) { return d[1] + 1; });
 
 		return l2;
 	};
@@ -1174,10 +1168,10 @@ function createZ1 (next) {
 				.attr("x", function(d) { return d[0] + 1; })
 				.attr("y", function(d) { return d[1] + 1; })
 				.attr("rx", 1)
-				.attr("width", div - 2)
-				.attr("height", div - 2)
+				.attr("width", div - 3)
+				.attr("height", div - 3)
 					.style("stroke", f)
-		  		.style("stroke-width", 1)
+		  		.style("stroke-width", 2)
 					.style("fill", f)
 					.style("fill-opacity", 0.6);
 
@@ -1325,8 +1319,7 @@ function createZ1 (next) {
 		svg.selectAll("rect.active")
 			.data(d)
 			.attr("x", function(d) { return d[0] + 1; })
-			.attr("y", function(d) { return d[1] + 1; })
-			.attr("rx", 1);
+			.attr("y", function(d) { return d[1] + 1; });
 
 		return z1;
 	}; 
@@ -1372,10 +1365,10 @@ function createZ2 (next) {
 				.attr("x", function(d) { return d[0] + 1; })
 				.attr("y", function(d) { return d[1] + 1; })
 				.attr("rx", 1)
-				.attr("width", div - 2)
-				.attr("height", div - 2)
+				.attr("width", div - 3)
+				.attr("height", div - 3)
 					.style("stroke", f)
-		  		.style("stroke-width", 1)
+		  		.style("stroke-width", 2)
 					.style("fill", f)
 					.style("fill-opacity", 0.6);
 
@@ -1524,8 +1517,7 @@ function createZ2 (next) {
 		svg.selectAll("rect.active")
 			.data(d)
 			.attr("x", function(d) { return d[0] + 1; })
-			.attr("y", function(d) { return d[1] + 1; })
-			.attr("rx", 1);
+			.attr("y", function(d) { return d[1] + 1; });
 
 		return z2;
 	}; 
@@ -1589,10 +1581,10 @@ function createT(next) {
 				.attr("x", function(d) { return d[0] + 1; })
 				.attr("y", function(d) { return d[1] + 1; })
 				.attr("rx", 1)
-				.attr("width", div - 2)
-				.attr("height", div - 2)
+				.attr("width", div - 3)
+				.attr("height", div - 3)
 					.style("stroke", f)
-		  		.style("stroke-width", 1)
+		  		.style("stroke-width", 2)
 					.style("fill", f)
 					.style("fill-opacity", 0.6);
 
@@ -1814,8 +1806,7 @@ function createT(next) {
 		svg.selectAll("rect.active")
 			.data(d)
 			.attr("x", function(d) { return d[0] + 1; })
-			.attr("y", function(d) { return d[1] + 1; })
-			.attr("rx", 1);
+			.attr("y", function(d) { return d[1] + 1; });
 
 		return t;
 	}; 
@@ -1919,12 +1910,12 @@ function updateGame() {
 			.attr("x", function(d, i, j) { return i * div + 1; })
 			.attr("y", function(d, i, j) { return j * div + 1; })
 			.attr("rx", 1)
-			.attr("width", function(d) { return div - 2; })
-			.attr("height", function(d) { return div - 2; })
+			.attr("width", function(d) { return div - 3; })
+			.attr("height", function(d) { return div - 3; })
 				.style("fill", function(d, i, j) { return d ? gamedata[j][i] : "none"; })
 				.style("fill-opacity", function(d, i, j) { return d ? 0.7 : "none"; })
 				.style("stroke", function(d, i, j) { return d ? gamedata[j][i] : "none"; })
-				.style("stroke-width", function(d) { return d ? 1 : 0; });
+				.style("stroke-width", function(d) { return d ? 2 : 0; });
 	
 	if (!emptyRow(1)) {
 		gameover = true;
@@ -2004,7 +1995,7 @@ function drawNext(data, length, fill) {
 				.attr("width", length - 2)
 				.attr("height", length - 2)
 		  		.style("stroke", fill)
-		  		.style("stroke-width", 1)
+		  		.style("stroke-width", 1.1)
 					.style("fill", fill)
 					.style("fill-opacity", 0.6);
 }
