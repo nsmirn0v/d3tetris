@@ -1991,11 +1991,11 @@ function drawNext(data, length, fill) {
 			.append("rect")
 				.attr("x", function(d) { return d[0]; })
 				.attr("y", function(d) { return d[1]; })
-				.attr("rx", 1)
-				.attr("width", length - 2)
-				.attr("height", length - 2)
+				// .attr("rx", 1)
+				.attr("width", length - 2.5)
+				.attr("height", length - 2.5)
 		  		.style("stroke", fill)
-		  		.style("stroke-width", 1.1)
+		  		.style("stroke-width", 1.5)
 					.style("fill", fill)
 					.style("fill-opacity", 0.6);
 }
