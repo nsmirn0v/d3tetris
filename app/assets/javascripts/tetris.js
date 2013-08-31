@@ -1852,28 +1852,40 @@ function attachKeyListeners() {
 	d3.select("body")
 		.on("keydown", function(event) {
 			if (d3.event.keyCode == 37) {
-				if (!paused && (shape.animate() || shape.grace()))
+				if (!paused && (shape.animate() || shape.grace())) {
+					d3.event.preventDefault();
 					shape.left().draw();
+				}
 			}
 			else if (d3.event.keyCode == 39) {
-				if (!paused && (shape.animate() || shape.grace()))
+				if (!paused && (shape.animate() || shape.grace())) {
+					d3.event.preventDefault();
 					shape.right().draw();
+				}
 			}
 			else if (d3.event.keyCode == 40) {
-				if (!paused && shape.animate())
+				if (!paused && shape.animate()) {
+					d3.event.preventDefault();
 					shape.down().draw();
+				}
 			}
 			else if (d3.event.keyCode == 32) {
-				if (!paused && shape.animate())
+				if (!paused && shape.animate()) {
+					d3.event.preventDefault();
 					shape.drop().draw();
+				}
 			}
 			else if (d3.event.keyCode == 38) {
-				if (!paused && (shape.animate() || shape.grace()))
+				if (!paused && (shape.animate() || shape.grace())) {
+					d3.event.preventDefault();
 					shape.rotate().draw();
+				}
 			}
 			else if (d3.event.keyCode == 80) {
-				if (interval)
+				if (interval) {
+					d3.event.preventDefault();
 					pause();
+				}
 			}
 		});
 }

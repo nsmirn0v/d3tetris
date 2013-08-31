@@ -1,8 +1,8 @@
 class ScoresController < ApplicationController
   def create
 	  score = Score.create(level: 1, lines: 0, time: 0)
-	  # render json: { scoreID: score.id }
     session[:scoreID] = score.id
+    render json: { scoreID: score.id }
   end
 
   def update
