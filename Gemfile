@@ -1,14 +1,12 @@
 source 'https://rubygems.org'
 
-ruby '1.9.3'
-gem 'rails', '3.2.11'
-gem "mongoid", "~> 3.0.0"
-gem 'omniauth-facebook', "1.3"
+ruby '2.3.3'
+gem "rails", "4.2.4"
 
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '>= 1.0.3'
+  gem 'sass-rails'
+  gem 'coffee-rails'
+  gem 'uglifier'
 end
 
 gem 'jquery-rails'
