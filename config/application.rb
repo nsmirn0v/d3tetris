@@ -67,5 +67,8 @@ module D3tetris
 
     # Heroku requires this to be false
     config.assets.initialize_on_precompile=false
+
+    config.serve_static_assets = true
+    config.serve_static_files = true
   end
 end
